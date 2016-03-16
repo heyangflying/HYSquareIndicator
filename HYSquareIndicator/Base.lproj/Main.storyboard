@@ -50,6 +50,12 @@
                                     <action selector="dismiss:" destination="BYZ-38-t0r" eventType="touchUpInside" id="16Z-Vz-Tnf"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@何洋    @YounG @heyang" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPL-8N-U7l">
+                                <rect key="frame" x="262" y="424" width="58" height="62"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -63,7 +69,15 @@
                             <constraint firstItem="GVT-0x-q8Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z5f-HJ-NWe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Main" id="XMF-bb-1GF"/>
+                    <navigationItem key="navigationItem" title="Main" id="XMF-bb-1GF">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZyQ-DY-6Mm">
+                            <view key="customView" contentMode="scaleToFill" id="Dy3-Ol-OvR">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

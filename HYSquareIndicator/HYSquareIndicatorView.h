@@ -10,13 +10,10 @@
 
 @interface HYSquareIndicatorView : UIView
 
-
-
-
+/** show*/
++ (void)show;
 
 /** close*/
 + (void)dismiss;
-+ (void)show;
-
 
 @end

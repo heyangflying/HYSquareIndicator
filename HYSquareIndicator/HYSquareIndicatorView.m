@@ -8,11 +8,11 @@
 
 #define AnimationTime   0.2
 #define SizeScale 0.1
-#define kDotSize                (CGSizeMake(0.4 * self.frame.size.width, 0.4 * self.frame.size.height))
+#define kDotSize                CGSizeMake(0.4 * _bgGiew.frame.size.width, 0.4 * _bgGiew.frame.size.height)
 #define LeftTopPosition         (CGPointMake(0, 0))
-#define LeftTBottomPosition     (CGPointMake(0, 0.6 * self.frame.size.height))
-#define RightBottomPosition     (CGPointMake(0.6 * self.frame.size.width, 0.6 * self.frame.size.height))
-#define RightTopPosition        (CGPointMake(0.6 * self.frame.size.width, 0))
+#define LeftTBottomPosition     (CGPointMake(0, 0.6 * _bgGiew.frame.size.height))
+#define RightBottomPosition     (CGPointMake(0.6 * _bgGiew.frame.size.width, 0.6 * _bgGiew.frame.size.height))
+#define RightTopPosition        (CGPointMake(0.6 * _bgGiew.frame.size.width, 0))
 #define kDotColor               [UIColor colorWithRed:200/255.0 green:206/255.0 blue:221/255.0 alpha:1.0]
 
 #import "HYSquareIndicatorView.h"
@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSArray *dotViews;
 @property (assign, nonatomic) NSInteger dotIndex;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong,nonatomic) UIView *bgGiew;
 /** color*/
 @property (nonatomic,strong) NSArray *colors;
 @end
@@ -65,10 +66,8 @@
         self.backgroundColor        = [UIColor clearColor];
         self.clipsToBounds          = YES;
         self.userInteractionEnabled = NO;
-        CGSize bounds               = [UIScreen mainScreen].bounds.size;
-        self.frame                  = CGRectMake(0, 0, bounds.width * SizeScale, bounds.width * SizeScale);
-        self.center                 = [UIApplication sharedApplication].keyWindow.center;
-
+        self.frame                  = [UIApplication sharedApplication].keyWindow.frame;
+       
         [self initView];
         
     }
@@ -80,21 +79,28 @@
 {
     
     /** set color */
-    _colors                     = @[[UIColor redColor],[UIColor greenColor],[UIColor blueColor]];
+    _colors                     = @[[UIColor colorWithRed:0 green:191/255.0 blue:255/255.0 alpha:1],[UIColor colorWithRed:44/255.0 green:66/255.0 blue:117/255.0 alpha:1],[UIColor colorWithRed:160/255.0 green:32/255.0 blue:240/255.0 alpha:1]];
+    
+    CGSize bounds               = [UIScreen mainScreen].bounds.size;
+    
+    _bgGiew = [[UIView alloc]initWithFrame:CGRectMake(0, 0, bounds.width * SizeScale, bounds.width * SizeScale)];
+    _bgGiew.center                = [UIApplication sharedApplication].keyWindow.center;
     
     /** creat view*/
-    _dotView0                 = [[UIView alloc]initWithFrame:(CGRect){RightBottomPosition, kDotSize}];
+    _dotView0                 = [[UIView alloc]initWithFrame:(CGRect){CGPointMake(0.6 * _bgGiew.frame.size.width, 0.6 * _bgGiew.frame.size.height), kDotSize}];
     _dotView0.backgroundColor = _colors[0];
-    [self addSubview:_dotView0];
+    [_bgGiew addSubview:_dotView0];
 
-    _dotView1                 = [[UIView alloc]initWithFrame:(CGRect){LeftTBottomPosition, kDotSize}];
+    _dotView1                 = [[UIView alloc]initWithFrame:(CGRect){CGPointMake(0, 0.6 * _bgGiew.frame.size.height), kDotSize}];
     _dotView1.backgroundColor = _colors[1];;
-    [self addSubview:_dotView1];
+    [_bgGiew addSubview:_dotView1];
 
     _dotView2                 = [[UIView alloc]initWithFrame:(CGRect){LeftTopPosition, kDotSize}];
     _dotView2.backgroundColor = _colors[2];
-    [self addSubview:_dotView2];
-
+    [_bgGiew addSubview:_dotView2];
+    
+    
+    [self addSubview:_bgGiew];
 
     /** add array*/
     _dotViews                 = @[_dotView0, _dotView1, _dotView2];
@@ -102,6 +108,13 @@
     /** idx*/
     _dotIndex                 = 0;
 
+    
+    UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(_bgGiew.frame.origin.x, CGRectGetMaxY(_bgGiew.frame)+ 5, self.frame.size.width, 20)];
+    textLabel.text = @"加载中...";
+    textLabel.textColor =[ UIColor darkGrayColor];
+    textLabel.font = [UIFont systemFontOfSize:11.0];
+    [self addSubview:textLabel];
+    
 }
 
 /** repeat*/
